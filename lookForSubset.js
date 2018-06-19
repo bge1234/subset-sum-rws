@@ -2,16 +2,25 @@
 
 function subsetExists(set) {
   var posNeg = positiveNegative(set)
-  if (oneToOne(posNeg)) {
+  if (posNeg["pos"].length === 0 || posNeg["neg"].length === 0) {
+    return "No"
+  } else if (oneToOne(copyPosNeg(posNeg))) {
     return "Yes"
-  } else if (oneToMany(posNeg)) {
+  } else if (oneToMany(copyPosNeg(posNeg))) {
     return "Yes"
-  } else if (manyToOne(posNeg)) {
+  } else if (manyToOne(copyPosNeg(posNeg))) {
     return "Yes"
-  } else if (manyToMany(posNeg)) {
+  } else if (manyToMany(copyPosNeg(posNeg))) {
     return "Yes"
   } else {
     return "No"
+  }
+}
+
+function copyPosNeg(posNeg) {
+  return {
+    pos: posNeg["pos"].slice(0, posNeg["pos"].length),
+    neg: posNeg["neg"].slice(0, posNeg["neg"].length)
   }
 }
 
