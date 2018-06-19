@@ -95,4 +95,4 @@ function tests() {
   console.log("[-7, -3, -2, 8, 5] should be 'Yes' --> ", subsetExists([-7, -3, -2, 8, 5]))
 }
 
-console.log(tests());
+console.log(tests())
