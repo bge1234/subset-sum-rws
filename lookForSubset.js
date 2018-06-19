@@ -33,7 +33,7 @@ function positiveNegative(set) {
     if (set[i] > 0) {
       posNeg["pos"].push(set[i])
     } else if (set[i] < 0) {
-      posNeg["neg"].push(set[i])
+      posNeg["neg"].push(-1 * set[i])
     }
   }
 
@@ -43,7 +43,7 @@ function positiveNegative(set) {
 function oneToOne(posNeg) {
   for (var i = 0; i < posNeg["pos"].length; i++) {
     for (var j = 0; j < posNeg["neg"].length; j++) {
-      if (posNeg["pos"][i] === -1 * posNeg["neg"][j]) {
+      if (posNeg["pos"][i] === posNeg["neg"][j]) {
         return true
       }
     }
