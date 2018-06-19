@@ -99,7 +99,12 @@ function manyToOne(posNeg) {
 }
 
 function manyToMany(posNeg) {
-  return false
+  var newPosNeg = {
+    pos: getCombinations(posNeg["pos"]),
+    neg: getCombinations(posNeg["neg"])
+  }
+
+  return oneToOne(newPosNeg)
 }
 
 function getCombinations(array) {
