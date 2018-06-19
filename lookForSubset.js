@@ -102,4 +102,6 @@ function manyToMany(posNeg) {
   return false
 }
 
-console.log(subsetExists([-7, -3, -2, 8, 5]))
+// console.log(subsetExists([-7, -3, -2, 8, 5]))
+// console.log(subsetExists([-2, -5, -6, 8, 4, 3]))
+console.log(manyToMany(positiveNegative([-2, -5, -6, 8, 4, 9])))
