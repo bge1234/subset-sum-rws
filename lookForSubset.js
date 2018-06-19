@@ -4,23 +4,10 @@ function subsetExists(set) {
   var posNeg = positiveNegative(set)
   if (posNeg["pos"].length === 0 || posNeg["neg"].length === 0) {
     return "No"
-  } else if (oneToOne(copyPosNeg(posNeg))) {
-    return "Yes"
-  } else if (oneToMany(copyPosNeg(posNeg))) {
-    return "Yes"
-  } else if (manyToOne(copyPosNeg(posNeg))) {
-    return "Yes"
-  } else if (manyToMany(copyPosNeg(posNeg))) {
+  } else if (compare(getCombinations(posNeg["pos"]), getCombinations(posNeg["neg"]))) {
     return "Yes"
   } else {
     return "No"
-  }
-}
-
-function copyPosNeg(posNeg) {
-  return {
-    pos: posNeg["pos"].slice(0, posNeg["pos"].length),
-    neg: posNeg["neg"].slice(0, posNeg["neg"].length)
   }
 }
 
@@ -29,6 +16,7 @@ function positiveNegative(set) {
     pos: [],
     neg: []
   }
+
   for (var i = 0; i < set.length; i++) {
     if (set[i] > 0) {
       posNeg["pos"].push(set[i])
@@ -40,71 +28,16 @@ function positiveNegative(set) {
   return posNeg;
 }
 
-function oneToOne(posNeg) {
-  for (var i = 0; i < posNeg["pos"].length; i++) {
-    for (var j = 0; j < posNeg["neg"].length; j++) {
-      if (posNeg["pos"][i] === posNeg["neg"][j]) {
+function compare(pos, neg) {
+  for (var i = 0; i < pos.length; i++) {
+    for (var j = 0; j < neg.length; j++) {
+      if (pos[i] === neg[j]) {
         return true
       }
     }
   }
 
   return false
-}
-
-function oneToMany(posNeg) {
-  for (var i = 0; i < posNeg["pos"].length; i++) {
-    var remainder = posNeg["pos"][i] - posNeg["neg"][0]
-    var newPosNeg
-
-    if (posNeg["neg"] && posNeg["neg"].length === 1 && remainder === 0) {
-      return true
-    } else if (posNeg["neg"].length > 1) {
-      posNeg["neg"].splice(0, 1)
-      newPosNeg = {
-        pos: [remainder],
-        neg: posNeg["neg"]
-      }
-
-      if (remainder > 1) {
-        return oneToMany(newPosNeg)
-      }
-    } else {
-      return false
-    }
-  }
-}
-
-function manyToOne(posNeg) {
-  for (var i = 0; i < posNeg["neg"].length; i++) {
-    var remainder = posNeg["neg"][i] - posNeg["pos"][0]
-    var newPosNeg
-
-    if (posNeg["pos"] && posNeg["pos"].length === 1 && remainder === 0) {
-      return true
-    } else if (posNeg["pos"].length > 1) {
-      posNeg["pos"].splice(0, 1)
-      newPosNeg = {
-        pos: [remainder],
-        neg: posNeg["pos"]
-      }
-
-      if (remainder > 1) {
-        return oneToMany(newPosNeg)
-      }
-    } else {
-      return false
-    }
-  }
-}
-
-function manyToMany(posNeg) {
-  var newPosNeg = {
-    pos: getCombinations(posNeg["pos"]),
-    neg: getCombinations(posNeg["neg"])
-  }
-
-  return oneToOne(newPosNeg)
 }
 
 function getCombinations(array) {
