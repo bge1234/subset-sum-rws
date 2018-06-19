@@ -57,6 +57,7 @@ function getCombinations(array) {
 
   // Final combination is sum of all values
   var acc = 0
+
   for (var i = 0; i < array.length; i++) {
     acc += array[i]
   }
@@ -64,3 +65,28 @@ function getCombinations(array) {
 
   return combos
 }
+
+function tests() {
+  console.log("-- positiveNegative([-1, -2, -3, 1, 2, 3]) --")
+  console.log("Should be [1, 2, 3] on both sides --> ", positiveNegative([-1, -2, -3, 1, 2, 3]))
+  console.log()
+
+  console.log("-- getCombinations([1, 2, 3]) --")
+  console.log("Should be [1, 2, 3, 3, 4, 5, 6] --> ", getCombinations([1, 2, 3]))
+  console.log()
+
+  console.log("-- compare() and subsetExists() --");
+  console.log("[] should be 'No' --> ", subsetExists([]))
+  console.log("[-1] should be 'No' --> ", subsetExists([-1]))
+  console.log("[1] should be 'No' --> ", subsetExists([1]))
+  console.log("[-1, 1] should be 'Yes' --> ", subsetExists([-1, 1]))
+  console.log("[-1, -2, 3] should be 'Yes' --> ", subsetExists([-1, -2, 3]))
+  console.log("[-1, -3, 3] should be 'Yes' --> ", subsetExists([-1, -3, 3]))
+  console.log("[-1, -3, 2, 4] should be 'Yes' --> ", subsetExists([-1, -3, 2, 4]))
+  console.log("[-1, -3, 2, 4, 5] should be 'Yes' --> ", subsetExists([-1, -3, 2, 4, 5]))
+  console.log("[-3, -6, 2, 4, 5] should be 'Yes' --> ", subsetExists([-3, -6, 2, 4, 5]))
+  console.log("[-3, -6, 2, 5, 11] should be 'No' --> ", subsetExists([-3, -6, 2, 5, 11]))
+  console.log("[-7, -3, -2, 8, 5] should be 'Yes' --> ", subsetExists([-7, -3, -2, 8, 5]))
+}
+
+console.log(tests());
