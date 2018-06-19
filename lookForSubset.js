@@ -102,6 +102,27 @@ function manyToMany(posNeg) {
   return false
 }
 
-// console.log(subsetExists([-7, -3, -2, 8, 5]))
-// console.log(subsetExists([-2, -5, -6, 8, 4, 3]))
-console.log(manyToMany(positiveNegative([-2, -5, -6, 8, 4, 9])))
+function getCombinations(array) {
+  var combos = []
+
+  // Start with individual values
+  for (var i = 0; i < array.length; i++) {
+    combos.push(array[i])
+  }
+
+  // Continue with permuted combinations
+  for (var i = 0; i < array.length; i++) {
+    for (var j = i + 1; j < array.length; j++) {
+      combos.push(array[i] + array[j])
+    }
+  }
+
+  // Final combination is sum of all values
+  var acc = 0
+  for (var i = 0; i < array.length; i++) {
+    acc += array[i]
+  }
+  combos.push(acc)
+
+  return combos
+}
