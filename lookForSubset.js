@@ -76,7 +76,26 @@ function oneToMany(posNeg) {
 }
 
 function manyToOne(posNeg) {
-  return false
+  for (var i = 0; i < posNeg["neg"].length; i++) {
+    var remainder = posNeg["neg"][i] - posNeg["pos"][0]
+    var newPosNeg
+
+    if (posNeg["pos"] && posNeg["pos"].length === 1 && remainder === 0) {
+      return true
+    } else if (posNeg["pos"].length > 1) {
+      posNeg["pos"].splice(0, 1)
+      newPosNeg = {
+        pos: [remainder],
+        neg: posNeg["pos"]
+      }
+
+      if (remainder > 1) {
+        return oneToMany(newPosNeg)
+      }
+    } else {
+      return false
+    }
+  }
 }
 
 function manyToMany(posNeg) {
