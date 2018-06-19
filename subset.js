@@ -4,7 +4,7 @@ To run, pass the set as an array to subsetExists() and console.log the result (e
 
 Output will be either "Yes" or "No" (the problem didn't ask to find the subset with the sum of zero, just to determine whether or not there is one).
 
-To run the built-in tests, run `node lookForSubset.js`. */
+To run the built-in tests, run `node subset.js`. */
 
 function subsetExists(set) {
   var posNeg = positiveNegative(set)
