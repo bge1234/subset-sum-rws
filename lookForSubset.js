@@ -53,7 +53,26 @@ function oneToOne(posNeg) {
 }
 
 function oneToMany(posNeg) {
-  return false
+  for (var i = 0; i < posNeg["pos"].length; i++) {
+    var remainder = posNeg["pos"][i] - posNeg["neg"][0]
+    var newPosNeg
+
+    if (posNeg["neg"] && posNeg["neg"].length === 1 && remainder === 0) {
+      return true
+    } else if (posNeg["neg"].length > 1) {
+      posNeg["neg"].splice(0, 1)
+      newPosNeg = {
+        pos: [remainder],
+        neg: posNeg["neg"]
+      }
+
+      if (remainder > 1) {
+        return oneToMany(newPosNeg)
+      }
+    } else {
+      return false
+    }
+  }
 }
 
 function manyToOne(posNeg) {
